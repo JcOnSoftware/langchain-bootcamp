@@ -39,7 +39,8 @@ function makeMessage(text: string): FakeMessage {
 // Helper to create a minimal CapturedCall (cast to CapturedCall since FakeMessage is structurally compatible)
 function makeCall(text: string, model = "claude-haiku-4-5"): CapturedCall {
   return {
-    request: { model, messages: [{ role: "user", content: "hi" }], max_tokens: 100 },
+    model,
+    input: { messages: [{ role: "user", content: "hi" }] },
     response: makeMessage(text) as unknown as CapturedCall["response"],
     durationMs: 42,
     streamed: false,
@@ -70,7 +71,6 @@ const fakeExercise = {
     estimated_minutes: 30,
     requires: [],
     locales: ["es" as const],
-    provider: "anthropic" as const,
   },
   dir: "/fake/dir",
   trackSlug: "01-foundations",

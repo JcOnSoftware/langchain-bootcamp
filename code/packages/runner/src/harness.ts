@@ -1,15 +1,18 @@
-import { HarnessError, type RunOptions } from "./types.ts";
+/**
+ * Harness entry point.
+ *
+ * Applies the LangChain prototype patch, imports the user exercise module,
+ * invokes its default export, and returns the captured chat-model calls.
+ *
+ * See `harness-langchain.ts` for the prototype-patch details.
+ */
 
-export interface CapturedCall {
-  request: unknown;
-  response: {
-    model?: string;
-    usage: { input_tokens: number; output_tokens: number; [k: string]: unknown };
-    [k: string]: unknown;
-  };
-  durationMs: number;
-  streamed: boolean;
-}
+import { resolve } from "node:path";
+import { pathToFileURL } from "node:url";
+import { patchBaseChatModel } from "./harness-langchain.ts";
+import { HarnessError, type RunOptions, type CapturedCallLangChain } from "./types.ts";
+
+export type CapturedCall = CapturedCallLangChain;
 
 export interface HarnessResult {
   calls: CapturedCall[];
@@ -18,10 +21,35 @@ export interface HarnessResult {
 }
 
 export async function runUserCode(
-  _filePath: string,
-  _options: RunOptions = {},
+  filePath: string,
+  options: RunOptions = {},
 ): Promise<HarnessResult> {
-  throw new HarnessError(
-    "runUserCode not implemented yet — landing in Fase 2 (LangChain harness).",
-  );
+  const calls: CapturedCall[] = [];
+  const restore = patchBaseChatModel(calls);
+
+  try {
+    const absolutePath = resolve(filePath);
+    const moduleUrl = `${pathToFileURL(absolutePath).href}?t=${Date.now()}`;
+    const mod = (await import(moduleUrl)) as Record<string, unknown>;
+
+    const entryName = options.entry ?? "default";
+    const entry = mod[entryName];
+    if (typeof entry !== "function") {
+      throw new HarnessError(
+        `Exercise at ${filePath} must export ${
+          entryName === "default" ? "a default async function" : `function '${entryName}'`
+        }, got ${typeof entry}.`,
+      );
+    }
+
+    const userReturn = await (entry as () => unknown | Promise<unknown>)();
+
+    return {
+      calls,
+      lastCall: calls[calls.length - 1],
+      userReturn,
+    };
+  } finally {
+    restore();
+  }
 }
