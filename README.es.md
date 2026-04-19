@@ -6,7 +6,12 @@
 
 Repo hermano de [`ai-dev-bootcamp`](https://github.com/JcOnSoftware/ai-dev-bootcamp) — ese enseña los **SDKs nativos** (Anthropic, OpenAI, Gemini). Este arranca donde termina el otro y enseña la **abstracción arriba**: composición, retrieval, agentes, grafos, structured output, observability — todo provider-agnostic.
 
-**Público**: devs que ya saben al menos un SDK nativo y quieren subir a patrones de framework sin re-aprender lo básico.
+## Para quién es esto
+
+Dos perfiles son bienvenidos — sin prerequisito para arrancar.
+
+- **Ya hiciste [`ai-dev-bootcamp`](https://github.com/JcOnSoftware/ai-dev-bootcamp) (o tenés experiencia equivalente con un SDK nativo).** Saltá directo al Track 01. Las abstracciones de LangChain te van a hacer click rápido porque ya viste el metal debajo.
+- **Venís directo a aprender LangChain sin haber tocado un SDK nativo.** Podés arrancar igual. El curriculum asume que sabés TypeScript y tenés nociones mínimas de qué es un LLM (prompt, completion, tokens) — pero NO asume que hayas escrito código contra `@anthropic-ai/sdk`, `openai`, o `@google/genai`. Si querés contexto extra mientras resolvés los ejercicios, `ai-dev-bootcamp` es el recurso paralelo recomendado (no prerequisito).
 
 ## Estado
 
@@ -27,9 +32,26 @@ Mirá [`PLAN.md`](./PLAN.md) para el plan completo, decisiones y fases de ejecuc
 
 Providers soportados al `init`: **Anthropic**, **OpenAI**, **Gemini** — elegís uno, los ejercicios corren contra ése. El curriculum en sí es unificado — el valor central de LangChain ES la abstracción sobre providers.
 
+## ¿Venís de ai-dev-bootcamp? Mapa concreto de qué te sirve
+
+Lectura opcional — un puente explícito entre los tracks del hermano y los de este repo. Si hiciste alguno de estos en el sibling, ya tenés base armada para el track que le mapea acá. Si no los hiciste, también te sirve como mapa de qué ir a reforzar al `ai-dev-bootcamp` si un concepto te queda flojo mientras resolvés un ejercicio.
+
+| Track en ai-dev-bootcamp | Te deja preparado para… |
+|---|---|
+| `01-foundations` (cualquier provider) | Track 01 Composition, Track 05 Advanced patterns — qué es un chat completion, tokens, streaming básico |
+| `02-caching` / `02-context-management` / `02-context-caching` | Track 06 Observability (la parte de cost tracking) — usage metadata y por qué importa |
+| `03-tool-use` / `03-function-calling` | Track 03 Agents-tools, Track 04 LangGraph — la mecánica de tools debajo de `.bindTools()` y `createAgent()` |
+| `04-rag` (cualquier provider) | Track 02 Retrieval-RAG — embeddings, vector search, chunking; en LangChain todo eso vive detrás de abstracciones |
+| `05-agents` (cualquier provider) | Track 03 Agents-tools, Track 04 LangGraph — el agent loop manual vs. el grafo explícito |
+| `06-mcp` / `06-evals-production` / `06-advanced-features` | Track 05 Advanced patterns, Track 06 Observability — structured output, fallbacks, production checklist |
+
+No necesitás haber completado el sibling para arrancar acá. La tabla es un mapa por si querés reforzar un concepto específico mientras resolvés un ejercicio.
+
 ## Quick start
 
 Todavía no. La CLI (`lcdev`) no existe aún. Volvé para la v0.1.0.
+
+Mientras tanto, si querés construir base: [`ai-dev-bootcamp`](https://github.com/JcOnSoftware/ai-dev-bootcamp) es el repo hermano y es totalmente funcional hoy.
 
 ## Licencia
 
