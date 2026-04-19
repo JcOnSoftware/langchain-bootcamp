@@ -39,7 +39,10 @@
       "name": "@lcdev/runner",
       "version": "0.0.1",
       "dependencies": {
+        "@langchain/anthropic": "^1.0.0",
         "@langchain/core": "^1.1.0",
+        "@langchain/google-genai": "^1.0.0",
+        "@langchain/openai": "^1.0.0",
       },
     },
   },

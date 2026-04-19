@@ -1,0 +1,17 @@
+{
+  "id": "03-branch",
+  "track": "01-composition",
+  "title": "Conditional routing with RunnableBranch",
+  "version": "1.0.0",
+  "valid_until": "2026-10-01",
+  "concepts": [
+    "lcel",
+    "runnable-branch",
+    "conditional-routing",
+    "prompt-template"
+  ],
+  "estimated_minutes": 15,
+  "requires": ["01-hello-chain"],
+  "model_cost_hint": "~$0.002 per verify run (two invocations)",
+  "locales": ["es", "en"]
+}

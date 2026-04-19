@@ -85,8 +85,8 @@ describe("list command — locale-aware output", () => {
   test("lcdev list --locale es uses ES strings in hint", async () => {
     const { exitCode, stdout } = await runCli(["list", "--locale", "es"]);
     expect(exitCode).toBe(0);
-    // ES hint from es.json: "Ejecutá los tests de un ejercicio: lcdev verify <id>"
-    expect(stdout).toContain("Ejecutá los tests");
+    // ES hint from es.json: "Ejecuta los tests de un ejercicio: lcdev verify <id>"
+    expect(stdout).toContain("Ejecuta los tests");
   });
 
   test("lcdev list --locale en uses EN strings in hint", async () => {
@@ -114,11 +114,11 @@ describe("progress command — locale-aware output", () => {
 });
 
 describe("verify command — exercise.md path line", () => {
-  test("lcdev verify 01-first-call --locale en prints EN exercise doc path", async () => {
+  test("lcdev verify 01-hello-chain --locale en prints EN exercise doc path", async () => {
     // No ANTHROPIC_API_KEY → verify will fail on API key check, but the doc path
     // line is printed BEFORE the API key check per spec (Phase 7.3).
     // We assert on the exercise doc path line only.
-    const { stdout, stderr } = await runCli(["verify", "01-first-call", "--locale", "en"], {
+    const { stdout, stderr } = await runCli(["verify", "01-hello-chain", "--locale", "en"], {
       HOME: "/tmp/lcdev-test-no-home",
     });
     const combined = stdout + stderr;
@@ -126,8 +126,8 @@ describe("verify command — exercise.md path line", () => {
     expect(combined).toContain("en/exercise.md");
   });
 
-  test("lcdev verify 01-first-call --locale es prints ES exercise doc path", async () => {
-    const { stdout, stderr } = await runCli(["verify", "01-first-call", "--locale", "es"], {
+  test("lcdev verify 01-hello-chain --locale es prints ES exercise doc path", async () => {
+    const { stdout, stderr } = await runCli(["verify", "01-hello-chain", "--locale", "es"], {
       HOME: "/tmp/lcdev-test-no-home",
     });
     const combined = stdout + stderr;

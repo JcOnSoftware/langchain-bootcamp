@@ -6,6 +6,8 @@ import {
   extractText,
   renderReturn,
   renderSummary,
+  isAIMessage,
+  extractAIText,
   MAX_CHARS,
 } from "./render.ts";
 import type { HarnessResult, CapturedCall } from "@lcdev/runner";
@@ -159,9 +161,55 @@ describe("extractText", () => {
   });
 });
 
+// ─── isAIMessage ────────────────────────────────────────────────────────────
+
+describe("isAIMessage", () => {
+  it("returns true for a structural AIMessage with _getType=ai and content", () => {
+    const v = { content: "hi", _getType: () => "ai" };
+    expect(isAIMessage(v)).toBe(true);
+  });
+
+  it("returns false when _getType returns 'human'", () => {
+    const v = { content: "hi", _getType: () => "human" };
+    expect(isAIMessage(v)).toBe(false);
+  });
+
+  it("returns false for null / non-object / missing content", () => {
+    expect(isAIMessage(null)).toBe(false);
+    expect(isAIMessage("hi")).toBe(false);
+    expect(isAIMessage({ _getType: () => "ai" })).toBe(false);
+  });
+});
+
+// ─── extractAIText ──────────────────────────────────────────────────────────
+
+describe("extractAIText", () => {
+  it("returns string content as-is", () => {
+    const v = { content: "hello", _getType: () => "ai" };
+    expect(extractAIText(v)).toBe("hello");
+  });
+
+  it("joins 'text'-type blocks from array content with newlines", () => {
+    const v = {
+      content: [
+        { type: "text", text: "a" },
+        { type: "tool_use", id: "t1", name: "calc" },
+        { type: "text", text: "b" },
+      ],
+      _getType: () => "ai",
+    };
+    expect(extractAIText(v)).toBe("a\nb");
+  });
+});
+
 // ─── renderReturn ────────────────────────────────────────────────────────────
 
 describe("renderReturn", () => {
+  it("renders an AIMessage via extractAIText before SDK fallbacks", () => {
+    const v = { content: "from langchain", _getType: () => "ai" };
+    expect(renderReturn(v, false)).toBe("from langchain");
+  });
+
   it("renders a Message value as extracted text", () => {
     const msg = makeMessage("I am Claude");
     const result = renderReturn(msg, false);

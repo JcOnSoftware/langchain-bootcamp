@@ -1,0 +1,17 @@
+{
+  "id": "02-sequential",
+  "track": "01-composition",
+  "title": "Sequential chains: keyword then haiku",
+  "version": "1.0.0",
+  "valid_until": "2026-10-01",
+  "concepts": [
+    "lcel",
+    "runnable-sequence",
+    "multi-stage-chain",
+    "pipe-operator"
+  ],
+  "estimated_minutes": 15,
+  "requires": ["01-hello-chain"],
+  "model_cost_hint": "~$0.002 per verify run (two model calls)",
+  "locales": ["es", "en"]
+}

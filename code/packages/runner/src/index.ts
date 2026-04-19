@@ -7,3 +7,8 @@ export {
   type ExerciseTarget,
   type CapturedCallLangChain,
 } from "./types.ts";
+export {
+  createChatModel,
+  type SupportedProvider as ChatModelProvider,
+  type CreateChatModelOptions,
+} from "./chat-model.ts";

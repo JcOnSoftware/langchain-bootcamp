@@ -1,0 +1,17 @@
+{
+  "id": "01-hello-chain",
+  "track": "01-composition",
+  "title": "Your first LCEL chain",
+  "version": "1.0.0",
+  "valid_until": "2026-10-01",
+  "concepts": [
+    "lcel",
+    "pipe-operator",
+    "prompt-template",
+    "string-output-parser"
+  ],
+  "estimated_minutes": 10,
+  "requires": [],
+  "model_cost_hint": "~$0.001 per verify run (Haiku / GPT-4o-mini / Flash)",
+  "locales": ["es", "en"]
+}

@@ -101,6 +101,37 @@ export function extractTextFromGemini(resp: SdkGeminiResponse): string {
     .join("");
 }
 
+/**
+ * Structural alias for a LangChain `AIMessage` — detected via `_getType()`
+ * without importing from `@langchain/core`. Keeps the CLI free of a runtime
+ * dependency on core types.
+ */
+interface AIMessageLike {
+  content: string | Array<{ type: string; text?: string; [k: string]: unknown }>;
+  _getType?: () => string;
+}
+
+export function isAIMessage(v: unknown): v is AIMessageLike {
+  if (v === null || typeof v !== "object") return false;
+  const obj = v as Record<string, unknown>;
+  if (!("content" in obj)) return false;
+  const gt = obj["_getType"];
+  if (typeof gt !== "function") return false;
+  try {
+    return gt.call(obj) === "ai";
+  } catch {
+    return false;
+  }
+}
+
+export function extractAIText(msg: AIMessageLike): string {
+  if (typeof msg.content === "string") return msg.content;
+  return msg.content
+    .filter((b) => b.type === "text")
+    .map((b) => String(b.text ?? ""))
+    .join("\n");
+}
+
 export interface RenderOptions {
   full: boolean;
   target: "starter" | "solution";
@@ -154,6 +185,9 @@ export function extractText(msg: SdkMessage): string {
  * 3. Fallback → JSON.stringify under run.return_value_label
  */
 export function renderReturn(value: unknown, full: boolean): string {
+  if (isAIMessage(value)) {
+    return truncate(extractAIText(value), full);
+  }
   if (isMessage(value)) {
     return truncate(extractText(value), full);
   }

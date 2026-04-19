@@ -56,7 +56,7 @@ describe("run command — unit-level (no API)", () => {
 
   test("missing ANTHROPIC_API_KEY → exit 1 with no_key message", async () => {
     // Explicitly unset ANTHROPIC_API_KEY + fake HOME (no config) → no_key path.
-    const { exitCode, stderr } = await runCli(["run", "01-first-call"], {
+    const { exitCode, stderr } = await runCli(["run", "01-hello-chain"], {
       ANTHROPIC_API_KEY: "",
     });
     expect(exitCode).toBe(1);
@@ -88,11 +88,11 @@ describe("run command — integration (real API)", () => {
     }
   });
 
-  test("run 01-first-call --solution exits 0 and prints Model: line", async () => {
+  test("run 01-hello-chain --solution exits 0 and prints Model: line", async () => {
     if (!apiKey) return;
 
     const { exitCode, stdout } = await runCli(
-      ["run", "01-first-call", "--solution"],
+      ["run", "01-hello-chain", "--solution"],
       { ANTHROPIC_API_KEY: apiKey },
     );
     expect(exitCode).toBe(0);
@@ -101,11 +101,11 @@ describe("run command — integration (real API)", () => {
     expect(hasModel).toBe(true);
   });
 
-  test("run 01-first-call --solution prints non-empty response text", async () => {
+  test("run 01-hello-chain --solution prints non-empty response text", async () => {
     if (!apiKey) return;
 
     const { exitCode, stdout } = await runCli(
-      ["run", "01-first-call", "--solution"],
+      ["run", "01-hello-chain", "--solution"],
       { ANTHROPIC_API_KEY: apiKey },
     );
     expect(exitCode).toBe(0);
@@ -129,7 +129,7 @@ describe("run command — integration (real API)", () => {
     expect(beforeSummary.length).toBeGreaterThan(0);
   });
 
-  test("run 01-first-call does NOT write progress.json", async () => {
+  test("run 01-hello-chain does NOT write progress.json", async () => {
     if (!apiKey) return;
 
     const progressPath = join(homedir(), ".lcdev", "progress.json");
@@ -141,7 +141,7 @@ describe("run command — integration (real API)", () => {
       statBefore = undefined;
     }
 
-    await runCli(["run", "01-first-call", "--solution"], { ANTHROPIC_API_KEY: apiKey });
+    await runCli(["run", "01-hello-chain", "--solution"], { ANTHROPIC_API_KEY: apiKey });
 
     let statAfter: { mtime: Date } | undefined;
     try {
@@ -160,11 +160,11 @@ describe("run command — integration (real API)", () => {
     }
   });
 
-  test("run 01-first-call --solution --locale en uses EN labels", async () => {
+  test("run 01-hello-chain --solution --locale en uses EN labels", async () => {
     if (!apiKey) return;
 
     const { exitCode, stdout } = await runCli(
-      ["run", "01-first-call", "--solution", "--locale", "en"],
+      ["run", "01-hello-chain", "--solution", "--locale", "en"],
       { ANTHROPIC_API_KEY: apiKey },
     );
     expect(exitCode).toBe(0);

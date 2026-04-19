@@ -15,7 +15,7 @@ Dos perfiles son bienvenidos — sin prerequisito para empezar.
 
 ## Estado
 
-**v0.1 — en bootstrap.** El curriculum está diseñado (6 tracks × 5 ejercicios), la infra se está portando del repo hermano.
+**v0.1 — en bootstrap.** El Track 01 (Composition) ya está completo — 5 ejercicios ejecutables. Tracks 02-06 en camino.
 
 Mira [`PLAN.md`](./PLAN.md) para el plan completo, decisiones y fases de ejecución.
 
@@ -49,9 +49,20 @@ No necesitas haber completado el sibling para empezar aquí. La tabla es un mapa
 
 ## Quick start
 
-Todavía no. La CLI (`lcdev`) no existe aún. Vuelve para la v0.1.0.
+Track 01 (Composition) ya corre. Tracks 02-06 están en el roadmap.
 
-Mientras tanto, si quieres construir base: [`ai-dev-bootcamp`](https://github.com/JcOnSoftware/ai-dev-bootcamp) es el repo hermano y es totalmente funcional hoy.
+```bash
+git clone https://github.com/JcOnSoftware/langchain-bootcamp.git
+cd langchain-bootcamp/code
+bun install
+bun run packages/cli/src/index.ts init       # elige proveedor + pega API key
+bun run packages/cli/src/index.ts list        # mira los 5 ejercicios del Track 01
+bun run packages/cli/src/index.ts verify 01-hello-chain --solution
+```
+
+El binario `lcdev` publicado llega con la v0.1.0. Por ahora los comandos de arriba funcionan directo.
+
+Si quieres más base de SDKs nativos antes, [`ai-dev-bootcamp`](https://github.com/JcOnSoftware/ai-dev-bootcamp) es el repo hermano y está totalmente funcional hoy.
 
 ## Licencia
 
