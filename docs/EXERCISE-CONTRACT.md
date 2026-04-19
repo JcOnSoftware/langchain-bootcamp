@@ -269,3 +269,25 @@ What NOT to do:
 - Do NOT import a corpus from a sibling exercise — copy it instead, even at the cost of duplication. Each exercise must stand on its own.
 
 If a future track needs genuinely large corpora (hundreds of docs), that's a separate architectural decision — raise it via `/sdd-new`, do not set the precedent silently.
+
+## Agents & tool-call assertions
+
+Starting with Fase 5 (track `03-agents-tools`), exercises invoke agent loops that call the model multiple times per run. The harness's `BaseChatModel.invoke` patch automatically captures `AIMessage.tool_calls` on every intercepted call — `result.calls[i].response.tool_calls` is populated whenever the model decided to call tools. No extra wiring, no callbacks.
+
+Two rules for tool-call assertions:
+
+1. **Assert on tool NAME, never on ARG VALUES.** The model chooses arg shapes non-deterministically (e.g. `"Lima"` vs `"Lima, Peru"` vs `"lima"`), so pinning them is a false-failure factory. Names are part of the tool contract and stable:
+   ```ts
+   // Good
+   expect(toolCalls[0]?.name).toBe("get_weather");
+
+   // Bad — flaky
+   expect(toolCalls[0]?.args).toEqual({ city: "Lima" });
+   ```
+2. **Use lower-bound `calls.length >= N` for agent loops.** A ReAct agent with a small model may iterate more than the reference solution did — asserting `=== 2` breaks on model drift. If the shape matters, assert ranges or filter by `response.tool_calls?.length >= 1`:
+   ```ts
+   const withTools = result.calls.filter((c) => (c.response.tool_calls ?? []).length >= 1);
+   expect(withTools.length).toBeGreaterThanOrEqual(1);
+   ```
+
+Exception: exercises that do NOT run an agent loop (e.g. `01-bind-tools`, which calls `bound.invoke` once) can legitimately use `expect(result.calls).toHaveLength(1)`.

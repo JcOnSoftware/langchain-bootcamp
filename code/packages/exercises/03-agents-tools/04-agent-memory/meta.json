@@ -1,0 +1,17 @@
+{
+  "id": "04-agent-memory",
+  "track": "03-agents-tools",
+  "title": "Persist agent state across turns with MemorySaver",
+  "version": "1.0.0",
+  "valid_until": "2026-10-19",
+  "concepts": [
+    "checkpointer",
+    "memory-saver",
+    "thread-id",
+    "multi-turn-agent"
+  ],
+  "estimated_minutes": 15,
+  "requires": ["02-react-agent"],
+  "model_cost_hint": "~$0.003 per verify run (two agent turns)",
+  "locales": ["es", "en"]
+}

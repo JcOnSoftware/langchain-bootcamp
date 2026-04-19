@@ -1,0 +1,17 @@
+{
+  "id": "05-streaming-steps",
+  "track": "03-agents-tools",
+  "title": "Stream intermediate agent snapshots with streamMode: values",
+  "version": "1.0.0",
+  "valid_until": "2026-10-19",
+  "concepts": [
+    "agent-streaming",
+    "stream-mode-values",
+    "intermediate-state",
+    "for-await"
+  ],
+  "estimated_minutes": 12,
+  "requires": ["02-react-agent"],
+  "model_cost_hint": "~$0.002 per verify run (single agent run)",
+  "locales": ["es", "en"]
+}

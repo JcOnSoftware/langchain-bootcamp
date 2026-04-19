@@ -1,0 +1,17 @@
+{
+  "id": "02-react-agent",
+  "track": "03-agents-tools",
+  "title": "Run a ReAct agent with createReactAgent and two tools",
+  "version": "1.0.0",
+  "valid_until": "2026-10-19",
+  "concepts": [
+    "react-agent",
+    "createReactAgent",
+    "multi-tool",
+    "agent-loop"
+  ],
+  "estimated_minutes": 15,
+  "requires": ["01-bind-tools"],
+  "model_cost_hint": "~$0.002 per verify run (multi-turn agent loop)",
+  "locales": ["es", "en"]
+}
