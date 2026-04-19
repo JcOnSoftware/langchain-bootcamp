@@ -7,12 +7,13 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@lcdev/runner": "workspace:*",
     "@langchain/anthropic": "^1.0.0",
+    "@langchain/classic": "^1.0.0",
     "@langchain/core": "^1.1.0",
     "@langchain/google-genai": "^1.0.0",
     "@langchain/langgraph": "^1.0.0",
     "@langchain/openai": "^1.0.0",
+    "@lcdev/runner": "workspace:*",
     "zod": "^3.25.0"
   }
 }

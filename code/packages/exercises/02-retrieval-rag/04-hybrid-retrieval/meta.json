@@ -1,0 +1,18 @@
+{
+  "id": "04-hybrid-retrieval",
+  "track": "02-retrieval-rag",
+  "title": "Hybrid retrieval: MMR + keyword-boost reranking",
+  "version": "1.0.0",
+  "valid_until": "2026-10-19",
+  "concepts": [
+    "mmr",
+    "maximal-marginal-relevance",
+    "keyword-boost",
+    "reranking",
+    "runnable-lambda"
+  ],
+  "estimated_minutes": 15,
+  "requires": ["02-vector-store"],
+  "model_cost_hint": "~$0.0001 per verify run (embeddings only, no chat)",
+  "locales": ["es", "en"]
+}

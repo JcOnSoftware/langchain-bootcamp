@@ -1,0 +1,17 @@
+{
+  "id": "02-vector-store",
+  "track": "02-retrieval-rag",
+  "title": "Embed a corpus into MemoryVectorStore and query it",
+  "version": "1.0.0",
+  "valid_until": "2026-10-19",
+  "concepts": [
+    "embeddings",
+    "memory-vector-store",
+    "similarity-search",
+    "from-documents"
+  ],
+  "estimated_minutes": 12,
+  "requires": ["01-document-loader"],
+  "model_cost_hint": "~$0.00005 per verify run (text-embedding-3-small — embeddings only, no chat)",
+  "locales": ["es", "en"]
+}

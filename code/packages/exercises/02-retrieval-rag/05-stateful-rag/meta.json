@@ -1,0 +1,18 @@
+{
+  "id": "05-stateful-rag",
+  "track": "02-retrieval-rag",
+  "title": "Stateful RAG with RunnableWithMessageHistory",
+  "version": "1.0.0",
+  "valid_until": "2026-10-19",
+  "concepts": [
+    "rag",
+    "message-history",
+    "runnable-with-message-history",
+    "session-id",
+    "in-memory-chat-message-history"
+  ],
+  "estimated_minutes": 20,
+  "requires": ["03-basic-rag"],
+  "model_cost_hint": "~$0.002 per verify run (Haiku / GPT-4o-mini / Flash × 2 turns + embeddings)",
+  "locales": ["es", "en"]
+}

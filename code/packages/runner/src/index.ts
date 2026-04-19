@@ -12,3 +12,8 @@ export {
   type SupportedProvider as ChatModelProvider,
   type CreateChatModelOptions,
 } from "./chat-model.ts";
+export {
+  createEmbeddings,
+  type EmbeddingsProvider,
+  type CreateEmbeddingsOptions,
+} from "./embeddings.ts";

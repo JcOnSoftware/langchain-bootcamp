@@ -239,3 +239,33 @@ Before opening a PR:
 - [ ] `bunx tsc --noEmit` passes from `code/`.
 - [ ] `meta.json.id` matches directory; `meta.json.track` matches parent.
 - [ ] Tests assert on SHAPE, never on LLM text content.
+
+## Embeddings capture gap (v0.1)
+
+The harness patches `BaseChatModel._generate` and `._streamResponseChunks` on the prototype. That surface catches every chat-model invocation but DOES NOT cover `Embeddings.prototype.embedDocuments` or `Embeddings.prototype.embedQuery`. In RAG exercises the retrieval step (embedding the query, embedding the corpus) therefore runs under the harness WITHOUT being recorded in `result.calls`.
+
+Test-writing implication:
+
+- `result.calls.length` counts chat-model calls only. For a pure retrieval exercise (exercises 01, 02, 04 in track `02-retrieval-rag`) the correct assertion is `expect(result.calls).toHaveLength(0)`.
+- For a RAG exercise with one generation step (exercise 03) the correct assertion is `expect(result.calls).toHaveLength(1)`.
+- Never assert on "embedding calls made" — that signal is not captured in v0.1.
+
+This gap is intentional for v0.1: a single surface (`BaseChatModel`) keeps the harness simple and keeps exercise tests deterministic. The natural home for embeddings cost/latency visibility is track `06-observability`, where dedicated exercises will add opt-in capture via callbacks.
+
+## Corpus fixtures
+
+Starting with Fase 4 (track `02-retrieval-rag`), the convention is **inline-corpus-per-exercise**: every exercise ships its own `const CORPUS = [...]` at the top of `starter.ts` / `solution.ts`. No shared fixtures directory, no loaders from disk.
+
+Why:
+
+- **Self-contained files**: the learner reads the full pipeline (corpus → chain) in one place, without tab-switching.
+- **Readable diffs**: version-control shows exactly how the corpus changed when an exercise evolves.
+- **No import path gymnastics**: the 6-file template stays minimal — meta, solution, starter, tests, and two locale docs.
+
+What NOT to do:
+
+- Do NOT create a `packages/exercises/_fixtures/` directory for cross-exercise corpora.
+- Do NOT load corpora from external `.json` / `.txt` files under the exercise directory.
+- Do NOT import a corpus from a sibling exercise — copy it instead, even at the cost of duplication. Each exercise must stand on its own.
+
+If a future track needs genuinely large corpora (hundreds of docs), that's a separate architectural decision — raise it via `/sdd-new`, do not set the precedent silently.
