@@ -1,0 +1,18 @@
+{
+  "id": "05-checkpoint-resume",
+  "track": "04-langgraph",
+  "title": "Checkpoint + resume: interrupt, inspect, Command({resume})",
+  "version": "1.0.0",
+  "valid_until": "2026-10-01",
+  "concepts": [
+    "state-graph",
+    "memory-saver",
+    "interrupt",
+    "get-state",
+    "command-resume",
+    "thread-id"
+  ],
+  "estimated_minutes": 15,
+  "requires": [],
+  "locales": ["es", "en"]
+}

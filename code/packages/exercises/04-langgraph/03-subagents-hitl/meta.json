@@ -1,0 +1,18 @@
+{
+  "id": "03-subagents-hitl",
+  "track": "04-langgraph",
+  "title": "Subagents + human-in-the-loop via interrupt/resume",
+  "version": "1.0.0",
+  "valid_until": "2026-10-01",
+  "concepts": [
+    "subgraph",
+    "graph-composition",
+    "interrupt",
+    "command-resume",
+    "memory-saver",
+    "thread-id"
+  ],
+  "estimated_minutes": 25,
+  "requires": [],
+  "locales": ["es", "en"]
+}

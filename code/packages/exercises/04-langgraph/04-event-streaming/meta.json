@@ -1,0 +1,17 @@
+{
+  "id": "04-event-streaming",
+  "track": "04-langgraph",
+  "title": "Event streaming with graph.streamEvents",
+  "version": "1.0.0",
+  "valid_until": "2026-10-01",
+  "concepts": [
+    "state-graph",
+    "stream-events",
+    "v2-events",
+    "event-type-count"
+  ],
+  "estimated_minutes": 12,
+  "requires": [],
+  "model_cost_hint": "~$0.001 per verify run (one chat call)",
+  "locales": ["es", "en"]
+}

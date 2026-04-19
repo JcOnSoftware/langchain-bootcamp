@@ -1,0 +1,16 @@
+{
+  "id": "01-state-graph-basics",
+  "track": "04-langgraph",
+  "title": "Your first StateGraph: nodes, edges, typed state",
+  "version": "1.0.0",
+  "valid_until": "2026-10-01",
+  "concepts": [
+    "state-graph",
+    "annotation-root",
+    "reducers",
+    "start-end"
+  ],
+  "estimated_minutes": 12,
+  "requires": [],
+  "locales": ["es", "en"]
+}

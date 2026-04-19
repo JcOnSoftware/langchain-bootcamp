@@ -1,0 +1,18 @@
+{
+  "id": "02-react-as-graph",
+  "track": "04-langgraph",
+  "title": "ReAct as an explicit graph (hand-rolled tool dispatch)",
+  "version": "1.0.0",
+  "valid_until": "2026-10-01",
+  "concepts": [
+    "state-graph",
+    "messages-annotation",
+    "conditional-edges",
+    "tool-dispatch",
+    "react-pattern"
+  ],
+  "estimated_minutes": 20,
+  "requires": [],
+  "model_cost_hint": "~$0.002 per verify run (depends on loop count)",
+  "locales": ["es", "en"]
+}

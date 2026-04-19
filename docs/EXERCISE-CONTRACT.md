@@ -291,3 +291,15 @@ Two rules for tool-call assertions:
    ```
 
 Exception: exercises that do NOT run an agent loop (e.g. `01-bind-tools`, which calls `bound.invoke` once) can legitimately use `expect(result.calls).toHaveLength(1)`.
+
+## Graphs & interrupts
+
+Track `04-langgraph` takes learners one layer below `createReactAgent` into explicit `StateGraph` plumbing. Two conventions govern graph exercises:
+
+1. **Never wrap `graph.invoke` / `graph.stream*` in `try/catch`.** `interrupt()` inside a node throws a special `GraphInterrupt` that propagates up so the checkpointer can pause execution. Catching that exception silences the pause — the checkpointer never persists partial state, and `getState(thread)` returns nothing useful. This is non-negotiable; every `03-*` and `05-*` style exercise.md (HITL, checkpoint/resume) states it explicitly.
+
+2. **Checkpointer-backed graphs REQUIRE `{ configurable: { thread_id } }` on every `.invoke` call.** Missing it throws at runtime. The same `thread_id` across two invokes is what makes state persist; different `thread_id`s are independent sessions. Keep the thread object in a `const` and pass it to all invokes of that graph.
+
+Harness coverage: the `BaseChatModel.invoke` patch captures every chat call inside a graph node exactly like any other LangChain invocation. Graph exercises assert on `result.calls.length` normally (use `>=` lower bounds — graph loops can iterate). State shape is verified via `result.userReturn`; event streams via `graph.streamEvents(input, { version: "v2" })` collect events by `evt.event` into a count-by-type map.
+
+Out of scope for v0.1: `Pregel` low-level primitives, the functional API (`entrypoint`/`task`), persistent checkpointers (SQLite/Postgres/Redis), and distributed graphs.
