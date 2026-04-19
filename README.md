@@ -1,6 +1,6 @@
 # langchain-bootcamp
 
-> [🇪🇸 Leé esto en español →](./README.es.md)
+> [🇪🇸 Lee esto en español →](./README.es.md)
 
 **Rustlings for LangChain devs.** A hands-on bootcamp that teaches [LangChain](https://js.langchain.com/) (TypeScript) through 30 progressive exercises with automated tests against real APIs.
 

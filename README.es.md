@@ -4,20 +4,20 @@
 
 **Rustlings para devs de LangChain.** Un bootcamp hands-on que enseña [LangChain](https://js.langchain.com/) (TypeScript) a través de 30 ejercicios progresivos con tests automáticos contra APIs reales.
 
-Repo hermano de [`ai-dev-bootcamp`](https://github.com/JcOnSoftware/ai-dev-bootcamp) — ese enseña los **SDKs nativos** (Anthropic, OpenAI, Gemini). Este arranca donde termina el otro y enseña la **abstracción arriba**: composición, retrieval, agentes, grafos, structured output, observability — todo provider-agnostic.
+Repo hermano de [`ai-dev-bootcamp`](https://github.com/JcOnSoftware/ai-dev-bootcamp) — ese enseña los **SDKs nativos** (Anthropic, OpenAI, Gemini). Este arranca donde termina el otro y enseña la **abstracción de arriba**: composición, retrieval, agentes, grafos, structured output, observability — todo provider-agnostic.
 
 ## Para quién es esto
 
-Dos perfiles son bienvenidos — sin prerequisito para arrancar.
+Dos perfiles son bienvenidos — sin prerequisito para empezar.
 
-- **Ya hiciste [`ai-dev-bootcamp`](https://github.com/JcOnSoftware/ai-dev-bootcamp) (o tenés experiencia equivalente con un SDK nativo).** Saltá directo al Track 01. Las abstracciones de LangChain te van a hacer click rápido porque ya viste el metal debajo.
-- **Venís directo a aprender LangChain sin haber tocado un SDK nativo.** Podés arrancar igual. El curriculum asume que sabés TypeScript y tenés nociones mínimas de qué es un LLM (prompt, completion, tokens) — pero NO asume que hayas escrito código contra `@anthropic-ai/sdk`, `openai`, o `@google/genai`. Si querés contexto extra mientras resolvés los ejercicios, `ai-dev-bootcamp` es el recurso paralelo recomendado (no prerequisito).
+- **Ya hiciste [`ai-dev-bootcamp`](https://github.com/JcOnSoftware/ai-dev-bootcamp) (o tienes experiencia equivalente con un SDK nativo).** Ve directo al Track 01. Las abstracciones de LangChain te van a hacer click rápido porque ya viste el metal debajo.
+- **Vienes directo a aprender LangChain sin haber tocado un SDK nativo.** Puedes empezar igual. El curriculum asume que sabes TypeScript y tienes nociones mínimas de qué es un LLM (prompt, completion, tokens) — pero NO asume que hayas escrito código contra `@anthropic-ai/sdk`, `openai`, o `@google/genai`. Si quieres contexto extra mientras resuelves los ejercicios, `ai-dev-bootcamp` es el recurso paralelo recomendado (no prerequisito).
 
 ## Estado
 
 **v0.1 — en bootstrap.** El curriculum está diseñado (6 tracks × 5 ejercicios), la infra se está portando del repo hermano.
 
-Mirá [`PLAN.md`](./PLAN.md) para el plan completo, decisiones y fases de ejecución.
+Mira [`PLAN.md`](./PLAN.md) para el plan completo, decisiones y fases de ejecución.
 
 ## Curriculum — 6 tracks, 30 ejercicios
 
@@ -30,11 +30,11 @@ Mirá [`PLAN.md`](./PLAN.md) para el plan completo, decisiones y fases de ejecuc
 | **05 — Advanced patterns** | 5 | Structured output con Zod, fallback/retry, streaming de JSON parcial, extended thinking, validación de tool schemas |
 | **06 — Observability** | 5 | LangSmith tracing (opcional), custom callback handlers, cost tracking, debugging de chains, production checklist |
 
-Providers soportados al `init`: **Anthropic**, **OpenAI**, **Gemini** — elegís uno, los ejercicios corren contra ése. El curriculum en sí es unificado — el valor central de LangChain ES la abstracción sobre providers.
+Providers soportados al `init`: **Anthropic**, **OpenAI**, **Gemini** — eliges uno, los ejercicios corren contra ese. El curriculum en sí es unificado — el valor central de LangChain ES la abstracción sobre providers.
 
-## ¿Venís de ai-dev-bootcamp? Mapa concreto de qué te sirve
+## ¿Vienes de ai-dev-bootcamp? Mapa concreto de qué te sirve
 
-Lectura opcional — un puente explícito entre los tracks del hermano y los de este repo. Si hiciste alguno de estos en el sibling, ya tenés base armada para el track que le mapea acá. Si no los hiciste, también te sirve como mapa de qué ir a reforzar al `ai-dev-bootcamp` si un concepto te queda flojo mientras resolvés un ejercicio.
+Lectura opcional — un puente explícito entre los tracks del hermano y los de este repo. Si hiciste alguno de estos en el sibling, ya tienes base armada para el track que le mapea aquí. Si no los hiciste, también te sirve como mapa de qué ir a reforzar al `ai-dev-bootcamp` si un concepto te queda flojo mientras resuelves un ejercicio.
 
 | Track en ai-dev-bootcamp | Te deja preparado para… |
 |---|---|
@@ -45,14 +45,14 @@ Lectura opcional — un puente explícito entre los tracks del hermano y los de 
 | `05-agents` (cualquier provider) | Track 03 Agents-tools, Track 04 LangGraph — el agent loop manual vs. el grafo explícito |
 | `06-mcp` / `06-evals-production` / `06-advanced-features` | Track 05 Advanced patterns, Track 06 Observability — structured output, fallbacks, production checklist |
 
-No necesitás haber completado el sibling para arrancar acá. La tabla es un mapa por si querés reforzar un concepto específico mientras resolvés un ejercicio.
+No necesitas haber completado el sibling para empezar aquí. La tabla es un mapa por si quieres reforzar un concepto específico mientras resuelves un ejercicio.
 
 ## Quick start
 
-Todavía no. La CLI (`lcdev`) no existe aún. Volvé para la v0.1.0.
+Todavía no. La CLI (`lcdev`) no existe aún. Vuelve para la v0.1.0.
 
-Mientras tanto, si querés construir base: [`ai-dev-bootcamp`](https://github.com/JcOnSoftware/ai-dev-bootcamp) es el repo hermano y es totalmente funcional hoy.
+Mientras tanto, si quieres construir base: [`ai-dev-bootcamp`](https://github.com/JcOnSoftware/ai-dev-bootcamp) es el repo hermano y es totalmente funcional hoy.
 
 ## Licencia
 
-MIT — mirá [LICENSE](./LICENSE).
+MIT — mira [LICENSE](./LICENSE).
