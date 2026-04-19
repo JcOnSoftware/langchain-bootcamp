@@ -1,0 +1,24 @@
+{
+  "name": "langchain-bootcamp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Interactive CLI to learn LangChain through progressive exercises with automated tests. Sister repo to ai-dev-bootcamp.",
+  "license": "MIT",
+  "author": "Juan Carlos Yovera Cruz <jcyovera@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JcOnSoftware/langchain-bootcamp.git"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "lcdev": "bun run packages/cli/src/index.ts",
+    "test": "bun test",
+    "typecheck": "bun run --filter '*' typecheck"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5.9.0"
+  }
+}
