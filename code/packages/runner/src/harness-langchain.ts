@@ -86,7 +86,9 @@ interface BuildCaptureArgs {
 
 function buildCapture(args: BuildCaptureArgs): CapturedCallLangChain {
   const { model, input, output, start, streamed } = args;
-  const modelName = safeLlmType(model);
+  const responseMetadata = (output as { response_metadata?: Record<string, unknown> })
+    .response_metadata;
+  const modelName = resolveModelName(model, responseMetadata);
   const usageMetadata = (output as { usage_metadata?: Record<string, unknown> }).usage_metadata;
   const usage = {
     input_tokens: numericField(usageMetadata, "input_tokens"),
@@ -94,8 +96,6 @@ function buildCapture(args: BuildCaptureArgs): CapturedCallLangChain {
     total_tokens: numericField(usageMetadata, "total_tokens") || undefined,
     ...(usageMetadata ?? {}),
   };
-  const responseMetadata = (output as { response_metadata?: Record<string, unknown> })
-    .response_metadata;
   const toolCalls = (output as { tool_calls?: unknown[] }).tool_calls;
   const runId = (output as { id?: string }).id;
 
@@ -113,6 +113,29 @@ function buildCapture(args: BuildCaptureArgs): CapturedCallLangChain {
     durationMs: performance.now() - start,
     streamed,
   };
+}
+
+/**
+ * Resolve the canonical model id for a capture. Priority:
+ *   1. `AIMessage.response_metadata.model_name` — server-reported actual model.
+ *   2. `AIMessage.response_metadata.model` — some providers use this key instead.
+ *   3. The chat model instance's `.model` field — set by `createChatModel`.
+ *   4. `_llmType()` — provider family name (e.g., "anthropic").
+ *   5. Constructor name — last-resort fallback.
+ */
+function resolveModelName(
+  model: BaseChatModel,
+  responseMetadata: Record<string, unknown> | undefined,
+): string {
+  if (responseMetadata) {
+    const fromMetaName = responseMetadata["model_name"];
+    if (typeof fromMetaName === "string" && fromMetaName.length > 0) return fromMetaName;
+    const fromMeta = responseMetadata["model"];
+    if (typeof fromMeta === "string" && fromMeta.length > 0) return fromMeta;
+  }
+  const instanceModel = (model as unknown as { model?: unknown }).model;
+  if (typeof instanceModel === "string" && instanceModel.length > 0) return instanceModel;
+  return safeLlmType(model);
 }
 
 function safeLlmType(model: BaseChatModel): string {

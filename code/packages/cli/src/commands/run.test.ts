@@ -113,21 +113,9 @@ describe("run command — integration (real API)", () => {
     expect(stdout.trim().length).toBeGreaterThan(50);
   });
 
-  test("run 03-streaming --solution --stream-live has deltas BEFORE Model: line", async () => {
-    if (!apiKey) return;
-
-    const { exitCode, stdout } = await runCli(
-      ["run", "03-streaming", "--solution", "--stream-live"],
-      { ANTHROPIC_API_KEY: apiKey },
-    );
-    expect(exitCode).toBe(0);
-    // Find position of first Model: line (summary start)
-    const modelLineIdx = stdout.search(/Model:|Modelo:/);
-    expect(modelLineIdx).toBeGreaterThan(0);
-    // Content before the Model: line should be non-empty (the deltas)
-    const beforeSummary = stdout.slice(0, modelLineIdx).trim();
-    expect(beforeSummary.length).toBeGreaterThan(0);
-  });
+  // `--stream-live` has no exercise in tracks 01-02 that opts into `.stream()` —
+  // every current solution uses `.invoke()`. When a streaming-focused exercise
+  // lands in a future track, reintroduce a delta-ordering assertion here.
 
   test("run 01-hello-chain does NOT write progress.json", async () => {
     if (!apiKey) return;
