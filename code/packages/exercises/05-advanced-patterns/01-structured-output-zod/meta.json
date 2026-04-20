@@ -1,0 +1,16 @@
+{
+  "id": "01-structured-output-zod",
+  "track": "05-advanced-patterns",
+  "title": "Structured output with Zod: typed responses from any model",
+  "version": "0.1.0",
+  "valid_until": "2027-01-01",
+  "concepts": [
+    "withStructuredOutput",
+    "zod-schema",
+    "typed-llm-response",
+    "json-mode"
+  ],
+  "estimated_minutes": 15,
+  "requires": [],
+  "locales": ["es", "en"]
+}

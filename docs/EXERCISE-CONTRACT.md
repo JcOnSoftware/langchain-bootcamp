@@ -303,3 +303,33 @@ Track `04-langgraph` takes learners one layer below `createReactAgent` into expl
 Harness coverage: the `BaseChatModel.invoke` patch captures every chat call inside a graph node exactly like any other LangChain invocation. Graph exercises assert on `result.calls.length` normally (use `>=` lower bounds — graph loops can iterate). State shape is verified via `result.userReturn`; event streams via `graph.streamEvents(input, { version: "v2" })` collect events by `evt.event` into a count-by-type map.
 
 Out of scope for v0.1: `Pregel` low-level primitives, the functional API (`entrypoint`/`task`), persistent checkpointers (SQLite/Postgres/Redis), and distributed graphs.
+
+## Provider-gated tests (`skipIf`)
+
+Some exercises are valid only for a specific provider (e.g., Anthropic extended thinking). These exercises MUST guard their tests with `test.skipIf(...)` so the suite is **skipped** (not failed) on non-qualifying providers.
+
+Pattern:
+
+```ts
+// At module scope, BEFORE the describe block:
+const skipIfNotAnthropic =
+  process.env["LCDEV_PROVIDER"] !== "anthropic" &&
+  process.env["LCDEV_PROVIDER"] !== undefined;
+
+describe("05-advanced-patterns/04-extended-thinking", () => {
+  beforeAll(async () => {
+    if (skipIfNotAnthropic) return;   // ← guard: skip setup too
+    // ... API key check + runUserCode
+  }, 60_000);
+
+  test.skipIf(skipIfNotAnthropic)("hasThinking is true", () => {
+    expect(result.userReturn.hasThinking).toBe(true);
+  });
+});
+```
+
+Rules:
+1. **Only Anthropic-only features** should carry a `skipIf` guard. Exercises 01–03 and 05 in track `05-advanced-patterns` run on all providers and MUST NOT have provider guards.
+2. **The `skipIf` condition MUST also guard `beforeAll`** (check `if (skipIfNotAnthropic) return;`). Without this guard, `beforeAll` throws on missing API keys before `skipIf` can apply.
+3. **The `beforeAll` timeout** MUST be extended for slow operations (e.g., extended thinking): `beforeAll(async () => { ... }, 60_000)`. The default 5 s timeout is insufficient for reasoning models.
+4. **Grep gate**: `rg "skipIf" code/packages/exercises/05-advanced-patterns/` MUST return hits only from `04-extended-thinking/tests.test.ts`. Any other file is a contract violation.

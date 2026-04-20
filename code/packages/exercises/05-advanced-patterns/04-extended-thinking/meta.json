@@ -1,0 +1,16 @@
+{
+  "id": "04-extended-thinking",
+  "track": "05-advanced-patterns",
+  "title": "Extended thinking: reasoning traces with ChatAnthropic (Anthropic-only)",
+  "version": "0.1.0",
+  "valid_until": "2027-01-01",
+  "concepts": [
+    "extended-thinking",
+    "thinking-blocks",
+    "AIMessage-content-array",
+    "anthropic-only"
+  ],
+  "estimated_minutes": 20,
+  "requires": [],
+  "locales": ["es", "en"]
+}

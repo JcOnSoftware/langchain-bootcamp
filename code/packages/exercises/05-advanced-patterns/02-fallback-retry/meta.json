@@ -1,0 +1,16 @@
+{
+  "id": "02-fallback-retry",
+  "track": "05-advanced-patterns",
+  "title": "Fallback and retry: resilient chains when a primary runnable fails",
+  "version": "0.1.0",
+  "valid_until": "2027-01-01",
+  "concepts": [
+    "withFallbacks",
+    "RunnableLambda",
+    "withRetry",
+    "resilience"
+  ],
+  "estimated_minutes": 15,
+  "requires": [],
+  "locales": ["es", "en"]
+}

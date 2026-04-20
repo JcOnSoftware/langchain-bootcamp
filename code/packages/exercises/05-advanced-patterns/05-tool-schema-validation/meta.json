@@ -1,0 +1,17 @@
+{
+  "id": "05-tool-schema-validation",
+  "track": "05-advanced-patterns",
+  "title": "Tool schema validation: Zod-enforced args with tool() and bindTools",
+  "version": "0.1.0",
+  "valid_until": "2027-01-01",
+  "concepts": [
+    "tool",
+    "zod-schema",
+    "bindTools",
+    "tool-schema-validation",
+    "tool-calls"
+  ],
+  "estimated_minutes": 20,
+  "requires": [],
+  "locales": ["es", "en"]
+}
