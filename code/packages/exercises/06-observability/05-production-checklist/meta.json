@@ -1,0 +1,22 @@
+{
+  "id": "05-production-checklist",
+  "track": "06-observability",
+  "title": "Production checklist: retry, fallback, cost, error-boundary, run-collector",
+  "version": "0.1.0",
+  "valid_until": "2027-01-01",
+  "concepts": [
+    "withRetry",
+    "withFallbacks",
+    "cost-callback",
+    "error-boundary",
+    "RunCollectorCallbackHandler",
+    "production-hardening"
+  ],
+  "estimated_minutes": 30,
+  "requires": [
+    "01-langsmith-tracing",
+    "02-custom-callbacks",
+    "03-cost-tracking"
+  ],
+  "locales": ["es", "en"]
+}

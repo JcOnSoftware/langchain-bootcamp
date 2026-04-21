@@ -1,0 +1,17 @@
+{
+  "id": "03-cost-tracking",
+  "track": "06-observability",
+  "title": "Cost tracking: compute token costs from usage_metadata",
+  "version": "0.1.0",
+  "valid_until": "2027-01-01",
+  "concepts": [
+    "usage_metadata",
+    "token-cost",
+    "rate-table",
+    "observability",
+    "cost-arithmetic"
+  ],
+  "estimated_minutes": 20,
+  "requires": ["02-custom-callbacks"],
+  "locales": ["es", "en"]
+}

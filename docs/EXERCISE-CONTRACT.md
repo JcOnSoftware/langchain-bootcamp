@@ -333,3 +333,39 @@ Rules:
 2. **The `skipIf` condition MUST also guard `beforeAll`** (check `if (skipIfNotAnthropic) return;`). Without this guard, `beforeAll` throws on missing API keys before `skipIf` can apply.
 3. **The `beforeAll` timeout** MUST be extended for slow operations (e.g., extended thinking): `beforeAll(async () => { ... }, 60_000)`. The default 5 s timeout is insufficient for reasoning models.
 4. **Grep gate**: `rg "skipIf" code/packages/exercises/05-advanced-patterns/` MUST return hits only from `04-extended-thinking/tests.test.ts`. Any other file is a contract violation.
+
+## LangSmith-gated tests (`skipIf` on env key)
+
+Exercise `06-observability/01-langsmith-tracing` uses a different `skipIf` pattern: it guards only the **inner LangChainTracer scenario** on `LANGCHAIN_API_KEY`, not the whole suite. The main `RunCollectorCallbackHandler` scenario MUST always run (no key required).
+
+Pattern:
+
+```ts
+describe("06-observability/01-langsmith-tracing", () => {
+  let result: HarnessResult;
+
+  beforeAll(async () => {
+    // No LANGCHAIN_API_KEY check here — RunCollectorCallbackHandler works offline.
+    if (!process.env["ANTHROPIC_API_KEY"]) throw new Error("...");
+    result = await runUserCode(EXERCISE_FILE);
+  }, 30_000);
+
+  test("collectedRuns contains at least 1 run", () => {
+    // ← always runs — no skipIf
+    expect(result.userReturn.collectedRuns.length).toBeGreaterThanOrEqual(1);
+  });
+
+  // Only the LangChainTracer scenario is gated:
+  test.skipIf(!process.env["LANGCHAIN_API_KEY"])(
+    "tracingEnabled is true when LANGCHAIN_API_KEY is set",
+    () => {
+      expect(result.userReturn.tracingEnabled).toBe(true);
+    },
+  );
+});
+```
+
+Rules:
+1. **`skipIf(!LANGCHAIN_API_KEY)` wraps only the inner LangChainTracer test**, not `beforeAll` or the whole describe block. The collector test always runs.
+2. **Exercises 02–05 in track `06-observability` MUST NOT** contain `LANGCHAIN_API_KEY` guards.
+3. **Grep gate**: `rg "skipIf" code/packages/exercises/06-observability/` MUST return hits only from `01-langsmith-tracing/tests.test.ts`, and only on the inner LangChainTracer scenario.

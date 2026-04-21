@@ -1,0 +1,17 @@
+{
+  "id": "02-custom-callbacks",
+  "track": "06-observability",
+  "title": "Custom callbacks: lifecycle event hooks with BaseCallbackHandler",
+  "version": "0.1.0",
+  "valid_until": "2027-01-01",
+  "concepts": [
+    "BaseCallbackHandler",
+    "handleLLMStart",
+    "handleLLMEnd",
+    "callbacks",
+    "lifecycle-hooks"
+  ],
+  "estimated_minutes": 15,
+  "requires": ["01-langsmith-tracing"],
+  "locales": ["es", "en"]
+}

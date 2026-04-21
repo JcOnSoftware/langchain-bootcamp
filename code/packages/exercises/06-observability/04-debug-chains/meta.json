@@ -1,0 +1,17 @@
+{
+  "id": "04-debug-chains",
+  "track": "06-observability",
+  "title": "Debug chains: stream events v2 and spy handler",
+  "version": "0.1.0",
+  "valid_until": "2027-01-01",
+  "concepts": [
+    "streamEvents",
+    "stream-events-v2",
+    "event-types",
+    "spy-handler",
+    "debugging"
+  ],
+  "estimated_minutes": 20,
+  "requires": ["02-custom-callbacks"],
+  "locales": ["es", "en"]
+}
