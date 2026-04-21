@@ -15,7 +15,7 @@ Two profiles are welcome — no prerequisite to start.
 
 ## Status
 
-**v0.1 — in bootstrap.** Track 01 (Composition) is now complete — 5 runnable exercises. Tracks 02-06 still to come.
+**v0.1 — curriculum complete.** All 6 tracks × 5 exercises = 30 runnable exercises. Release wiring (`v0.1.0` tag + CI workflows + release notes) is the last milestone.
 
 See [`PLAN.md`](./PLAN.md) for the full plan, decisions, and execution phases.
 
@@ -49,18 +49,51 @@ You don't need to have completed the sibling to start here. The table is a map i
 
 ## Quick start
 
-Track 01 (Composition) is live. Tracks 02-06 are on the roadmap.
+Requires [Bun](https://bun.com) 1.3+ (Mac, Linux, Windows) and [VS Code](https://code.visualstudio.com/) (for `lcdev open` and `lcdev next`).
+
+**API keys** — get one for the provider you pick:
+- **Anthropic**: <https://console.claude.com/settings/keys>
+- **OpenAI**: <https://platform.openai.com/api-keys>
+- **Google (Gemini)**: <https://aistudio.google.com/apikey>
 
 ```bash
-git clone https://github.com/JcOnSoftware/langchain-bootcamp.git
+gh repo clone JcOnSoftware/langchain-bootcamp
 cd langchain-bootcamp/code
 bun install
-bun run packages/cli/src/index.ts init       # pick provider + paste API key
-bun run packages/cli/src/index.ts list        # see the 5 Track 01 exercises
-bun run packages/cli/src/index.ts verify 01-hello-chain --solution
 ```
 
-A published `lcdev` binary ships with v0.1.0. In the meantime, the commands above work directly.
+### Enable the `lcdev` command
+
+```bash
+# Mac / Linux:
+bun run setup
+
+# Windows PowerShell:
+powershell -File bin/setup.ps1
+```
+
+The setup script adds `code/bin/` to your PATH (zsh/bash/fish autodetected on Unix; user PATH on Windows). Safe to run multiple times.
+
+### First run
+
+```bash
+lcdev init                  # provider + API key + locale (en/es) → ~/.lcdev/config.json
+lcdev list                  # browse exercises grouped by track
+lcdev next                  # open the next incomplete exercise in VS Code
+```
+
+## Working on exercises
+
+| Command | What it does |
+|---------|--------------|
+| `lcdev list` | Browse exercises grouped by track, pick one to open |
+| `lcdev open <id>` | Open a specific exercise in VS Code |
+| `lcdev open <id> --solution` | View the reference solution |
+| `lcdev open` | Interactive picker — browse and select |
+| `lcdev next` | Open the next incomplete exercise |
+| `lcdev verify <id>` | Run tests against your implementation |
+| `lcdev run <id>` | Execute and see model output |
+| `lcdev progress` | Dashboard with completion per track |
 
 If you want more base on native SDKs first, [`ai-dev-bootcamp`](https://github.com/JcOnSoftware/ai-dev-bootcamp) is the sibling repo and is fully functional today.
 
