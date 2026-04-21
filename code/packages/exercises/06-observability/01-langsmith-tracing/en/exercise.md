@@ -14,14 +14,21 @@ The callbacks array is passed as the second argument to `model.invoke(input, { c
 
 The `LangChainTracer` scenario is automatically skipped if `LANGCHAIN_API_KEY` is not configured.
 
+### Gotcha — flushing LangSmith uploads
+
+`LangChainTracer` delegates HTTP uploads to a `langsmith` `Client` instance. Those uploads are **batched and async**: the tracer queues each run and sends them in chunks. In short-lived scripts (like `lcdev run` or a bun test), the Node.js process exits before the queue flushes — and the runs never land in your LangSmith dashboard, even though the code ran and the API key is valid.
+
+The fix is explicit: create the `Client` yourself, pass it to `LangChainTracer({ client })`, and `await client.awaitPendingTraceBatches()` before returning. This blocks until every queued batch has been sent.
+
 ## What to complete
 
 Open `starter.ts`. You need to:
 
 1. **Create the collector**: `const collector = new RunCollectorCallbackHandler()`.
-2. **Build the callbacks array**: always include `collector`; if `process.env["LANGCHAIN_API_KEY"]` exists, also push `new LangChainTracer()`.
+2. **Build the callbacks array**: always include `collector`; if `process.env["LANGCHAIN_API_KEY"]` exists, instantiate `const client = new Client()` and push `new LangChainTracer({ client })` so you can flush it later.
 3. **Invoke the model** with a simple message, passing `{ callbacks }` as the second argument.
-4. **Return** an object with:
+4. **Flush pending traces** with `await client.awaitPendingTraceBatches()` when tracing is enabled — without this, runs never reach LangSmith.
+5. **Return** an object with:
    - `collectedRuns`: `collector.tracedRuns` mapped to `{ id, name, run_type }`.
    - `tracingEnabled`: `boolean` indicating whether `LANGCHAIN_API_KEY` is present.
 
@@ -49,11 +56,17 @@ The key insight: the callbacks array is built dynamically from the environment. 
 
 ```ts
 const tracingEnabled = !!process.env["LANGCHAIN_API_KEY"];
-const callbacks = tracingEnabled
-  ? [collector, new LangChainTracer()]
-  : [collector];
+const client = tracingEnabled ? new Client() : undefined;
+const callbacks =
+  tracingEnabled && client
+    ? [collector, new LangChainTracer({ client })]
+    : [collector];
 
 await model.invoke([new HumanMessage("...")], { callbacks });
+
+if (client) {
+  await client.awaitPendingTraceBatches();
+}
 ```
 
-After the invoke, `collector.tracedRuns` is already populated. Map it with `.map(r => ({ id: r.id, name: r.name, run_type: r.run_type }))`.
+After the invoke, `collector.tracedRuns` is already populated. Map it with `.map(r => ({ id: r.id, name: r.name, run_type: r.run_type }))`. If you skip the `awaitPendingTraceBatches()` call, the tests still pass (the collector works offline) but LangSmith will show nothing.
