@@ -16,7 +16,7 @@ describe("05-advanced-patterns/03-streaming-json", () => {
       throw new Error(`${envKey} not set — this exercise hits the real API.`);
     }
     result = await runUserCode(EXERCISE_FILE);
-  });
+  }, 30_000);
 
   test("chunks array has more than one element (streaming emits multiple partial objects)", () => {
     const r = result.userReturn as { chunks: unknown[]; final: Record<string, unknown> };

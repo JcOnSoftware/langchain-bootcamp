@@ -16,7 +16,7 @@ describe("05-advanced-patterns/02-fallback-retry", () => {
       throw new Error(`${envKey} not set — this exercise hits the real API.`);
     }
     result = await runUserCode(EXERCISE_FILE);
-  });
+  }, 30_000);
 
   test("fallback path was taken (usedFallback === true)", () => {
     const r = result.userReturn as { usedFallback: boolean; result: string };

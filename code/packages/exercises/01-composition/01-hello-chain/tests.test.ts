@@ -16,7 +16,7 @@ describe("01-hello-chain", () => {
       throw new Error(`${envKey} not set — this exercise hits the real API.`);
     }
     result = await runUserCode(EXERCISE_FILE);
-  });
+  }, 30_000);
 
   test("makes exactly one model call", () => {
     expect(result.calls).toHaveLength(1);

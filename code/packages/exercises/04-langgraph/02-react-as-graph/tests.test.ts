@@ -16,7 +16,7 @@ describe("04-langgraph/02-react-as-graph", () => {
       throw new Error(`${envKey} not set — this exercise hits the real API.`);
     }
     result = await runUserCode(EXERCISE_FILE);
-  });
+  }, 30_000);
 
   test("graph performs at least 2 chat model calls (tool decision + answer)", () => {
     expect(result.calls.length).toBeGreaterThanOrEqual(2);

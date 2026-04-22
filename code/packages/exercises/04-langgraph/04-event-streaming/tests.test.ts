@@ -6,6 +6,7 @@ const EXERCISE_FILE = resolveExerciseFile(import.meta.url);
 describe("04-langgraph/04-event-streaming", () => {
   let result: HarnessResult;
 
+  // 30 s: streamEvents v2 with thinking models (Gemini 2.5 Flash) consistently exceeds bun's 5 s default
   beforeAll(async () => {
     const provider = process.env["LCDEV_PROVIDER"] ?? "anthropic";
     const envKey =
@@ -16,7 +17,7 @@ describe("04-langgraph/04-event-streaming", () => {
       throw new Error(`${envKey} not set — this exercise hits the real API.`);
     }
     result = await runUserCode(EXERCISE_FILE);
-  });
+  }, 30_000);
 
   test("at least one chat model call was captured", () => {
     expect(result.calls.length).toBeGreaterThanOrEqual(1);

@@ -23,7 +23,7 @@ describe("02-retrieval-rag/02-vector-store", () => {
       );
     }
     result = await runUserCode(EXERCISE_FILE);
-  });
+  }, 30_000);
 
   test("makes zero chat model calls (embeddings are not captured by the harness)", () => {
     expect(result.calls).toHaveLength(0);

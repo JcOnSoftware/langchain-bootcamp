@@ -8,7 +8,7 @@ describe("04-langgraph/01-state-graph-basics", () => {
 
   beforeAll(async () => {
     result = await runUserCode(EXERCISE_FILE);
-  });
+  }, 30_000);
 
   test("no chat model calls (this exercise has no LLM)", () => {
     expect(result.calls).toHaveLength(0);

@@ -10,7 +10,7 @@ describe("02-retrieval-rag/01-document-loader", () => {
   beforeAll(async () => {
     // Pure splitting — no model, no embeddings. No API key required.
     result = await runUserCode(EXERCISE_FILE);
-  });
+  }, 30_000);
 
   test("makes zero chat model calls (splitting is offline)", () => {
     expect(result.calls).toHaveLength(0);

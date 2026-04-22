@@ -16,7 +16,7 @@ describe("02-sequential", () => {
       throw new Error(`${envKey} not set — this exercise hits the real API.`);
     }
     result = await runUserCode(EXERCISE_FILE);
-  });
+  }, 30_000);
 
   test("makes exactly two model calls (one per stage)", () => {
     expect(result.calls).toHaveLength(2);

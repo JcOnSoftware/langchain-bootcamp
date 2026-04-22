@@ -21,7 +21,7 @@ describe("02-retrieval-rag/05-stateful-rag", () => {
       );
     }
     result = await runUserCode(EXERCISE_FILE);
-  });
+  }, 30_000);
 
   test("makes exactly two chat model calls (one per turn)", () => {
     expect(result.calls).toHaveLength(2);

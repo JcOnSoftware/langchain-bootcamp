@@ -16,7 +16,7 @@ describe("03-branch", () => {
       throw new Error(`${envKey} not set — this exercise hits the real API.`);
     }
     result = await runUserCode(EXERCISE_FILE);
-  });
+  }, 30_000);
 
   test("makes exactly two model calls (one per branch invocation)", () => {
     expect(result.calls).toHaveLength(2);

@@ -25,7 +25,7 @@ describe("05-advanced-patterns/01-structured-output-zod", () => {
       throw new Error(`${envKey} not set — this exercise hits the real API.`);
     }
     result = await runUserCode(EXERCISE_FILE);
-  });
+  }, 30_000);
 
   test("at least one chat model call captured", () => {
     expect(result.calls.length).toBeGreaterThanOrEqual(1);

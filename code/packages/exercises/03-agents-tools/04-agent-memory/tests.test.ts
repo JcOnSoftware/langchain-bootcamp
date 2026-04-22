@@ -17,7 +17,7 @@ describe("03-agents-tools/04-agent-memory", () => {
       throw new Error(`${envKey} not set — this exercise hits the real API.`);
     }
     result = await runUserCode(EXERCISE_FILE);
-  });
+  }, 30_000);
 
   test("at least two model calls — one per agent turn", () => {
     expect(result.calls.length).toBeGreaterThanOrEqual(2);

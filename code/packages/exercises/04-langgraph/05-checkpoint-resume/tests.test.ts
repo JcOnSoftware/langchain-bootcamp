@@ -9,7 +9,7 @@ describe("04-langgraph/05-checkpoint-resume", () => {
   beforeAll(async () => {
     // No live API required — pure graph checkpoint/resume semantics.
     result = await runUserCode(EXERCISE_FILE);
-  });
+  }, 30_000);
 
   test("no chat model calls (this exercise is pure graph plumbing)", () => {
     expect(result.calls).toHaveLength(0);

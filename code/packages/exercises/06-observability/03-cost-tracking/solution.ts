@@ -69,12 +69,15 @@ export default async function run(): Promise<{
     ? usageMetadata["output_tokens"]
     : 0;
 
-  // model id from response_metadata (server-reported) — same field the harness captures.
+  // model id: response_metadata (server-reported for Anthropic/OpenAI) with
+  // fallback to the model instance's .model property (Gemini omits it from metadata).
   const responseMetadata = (response as { response_metadata?: Record<string, unknown> })
     .response_metadata;
   const modelId =
     (typeof responseMetadata?.["model_name"] === "string" ? responseMetadata["model_name"]
     : typeof responseMetadata?.["model"] === "string" ? responseMetadata["model"]
+    : typeof (model as { model?: string }).model === "string"
+      ? (model as { model: string }).model
     : "");
 
   const { inputCost, outputCost, totalCost } = computeCost(modelId, inputTokens, outputTokens);

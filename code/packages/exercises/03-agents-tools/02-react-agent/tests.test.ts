@@ -17,7 +17,7 @@ describe("03-agents-tools/02-react-agent", () => {
       throw new Error(`${envKey} not set — this exercise hits the real API.`);
     }
     result = await runUserCode(EXERCISE_FILE);
-  });
+  }, 30_000);
 
   test("agent loop makes at least two model calls (decide + answer)", () => {
     expect(result.calls.length).toBeGreaterThanOrEqual(2);

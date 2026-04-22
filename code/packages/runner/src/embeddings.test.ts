@@ -22,10 +22,10 @@ describe("createEmbeddings", () => {
     expect((e as unknown as { model: string }).model).toBe("text-embedding-3-small");
   });
 
-  test("gemini → GoogleGenerativeAIEmbeddings with default model text-embedding-004", () => {
+  test("gemini → GoogleGenerativeAIEmbeddings with default model gemini-embedding-001", () => {
     const e = createEmbeddings("gemini", "AIza-test");
     expect(e.constructor.name).toBe("GoogleGenerativeAIEmbeddings");
-    expect((e as unknown as { model: string }).model).toBe("text-embedding-004");
+    expect((e as unknown as { model: string }).model).toBe("gemini-embedding-001");
   });
 
   test("anthropic with explicit fallback → OpenAIEmbeddings via fallback", () => {

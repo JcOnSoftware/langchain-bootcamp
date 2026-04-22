@@ -19,7 +19,7 @@ describe("03-agents-tools/03-multi-tool-recovery", () => {
     // If the broken tool's exception leaked out of the agent the harness
     // would throw here — so "did not throw" is itself a signal of recovery.
     result = await runUserCode(EXERCISE_FILE);
-  });
+  }, 30_000);
 
   test("runUserCode did not throw (agent recovered from the failing tool)", () => {
     expect(result).toBeDefined();

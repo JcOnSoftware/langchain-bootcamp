@@ -21,7 +21,7 @@ export interface CreateEmbeddingsOptions {
 const DEFAULT_MODELS: Record<EmbeddingsProvider, string> = {
   anthropic: "text-embedding-3-small", // fallback via OpenAIEmbeddings
   openai: "text-embedding-3-small",
-  gemini: "text-embedding-004",
+  gemini: "gemini-embedding-001", // text-embedding-004 deprecated; new naming convention
 };
 
 export function createEmbeddings(

@@ -16,7 +16,7 @@ describe("05-batch", () => {
       throw new Error(`${envKey} not set — this exercise hits the real API.`);
     }
     result = await runUserCode(EXERCISE_FILE);
-  });
+  }, 30_000);
 
   test("makes exactly three model calls (one per batch item)", () => {
     expect(result.calls).toHaveLength(3);

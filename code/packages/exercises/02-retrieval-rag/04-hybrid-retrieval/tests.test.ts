@@ -22,7 +22,7 @@ describe("02-retrieval-rag/04-hybrid-retrieval", () => {
       );
     }
     result = await runUserCode(EXERCISE_FILE);
-  });
+  }, 30_000);
 
   test("makes zero chat model calls (retrieval + reranking only)", () => {
     expect(result.calls).toHaveLength(0);

@@ -22,7 +22,7 @@ describe("02-retrieval-rag/03-basic-rag", () => {
       );
     }
     result = await runUserCode(EXERCISE_FILE);
-  });
+  }, 30_000);
 
   test("makes exactly one chat model call (retrieval is not captured)", () => {
     expect(result.calls).toHaveLength(1);
