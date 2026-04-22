@@ -76,8 +76,8 @@ export default async function run(): Promise<{
   const modelId =
     (typeof responseMetadata?.["model_name"] === "string" ? responseMetadata["model_name"]
     : typeof responseMetadata?.["model"] === "string" ? responseMetadata["model"]
-    : typeof (model as { model?: string }).model === "string"
-      ? (model as { model: string }).model
+    : typeof (model as unknown as { model?: string }).model === "string"
+      ? (model as unknown as { model: string }).model
     : "");
 
   const { inputCost, outputCost, totalCost } = computeCost(modelId, inputTokens, outputTokens);
