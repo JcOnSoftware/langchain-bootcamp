@@ -1,5 +1,7 @@
 # langchain-bootcamp
 
+[![CI](https://github.com/JcOnSoftware/langchain-bootcamp/actions/workflows/ci.yml/badge.svg)](https://github.com/JcOnSoftware/langchain-bootcamp/actions/workflows/ci.yml)
+
 > [🇬🇧 Read this in English →](./README.md)
 
 **Rustlings para devs de LangChain.** Un bootcamp hands-on que enseña [LangChain](https://js.langchain.com/) (TypeScript) a través de 30 ejercicios progresivos con tests automáticos contra APIs reales.
@@ -15,9 +17,7 @@ Dos perfiles son bienvenidos — sin prerequisito para empezar.
 
 ## Estado
 
-**v0.1 — curriculum completo.** Los 6 tracks × 5 ejercicios = 30 ejercicios ejecutables. Falta cerrar el release wiring (tag `v0.1.0` + CI workflows + release notes).
-
-Mira [`PLAN.md`](./PLAN.md) para el plan completo, decisiones y fases de ejecución.
+**v0.1.0 — publicado.** Los 6 tracks × 5 ejercicios = 30 ejercicios ejecutables, 3 providers, bilingüe (en/es), CI verde.
 
 ## Curriculum — 6 tracks, 30 ejercicios
 
