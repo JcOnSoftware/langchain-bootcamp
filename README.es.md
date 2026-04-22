@@ -97,6 +97,10 @@ lcdev next                  # abre el siguiente ejercicio pendiente en VS Code
 
 Si quieres más base de SDKs nativos antes, [`ai-dev-bootcamp`](https://github.com/JcOnSoftware/ai-dev-bootcamp) es el repo hermano y está totalmente funcional hoy.
 
+## Contribuir
+
+Nuevos ejercicios, bug fixes y traducciones son bienvenidos. Lee **[CONTRIBUTING.md](./CONTRIBUTING.md)** para setup, tests, convenciones de commits y cómo crear un ejercicio nuevo siguiendo el contrato.
+
 ## Licencia
 
 MIT — mira [LICENSE](./LICENSE).
